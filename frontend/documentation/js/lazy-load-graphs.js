@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     var lazyGraphs = [].slice.call(document.querySelectorAll('[lazy]'));
     var active = false;
 
-    var lazyLoad = function () {
+    var lazyLoad = function() {
         if (active === false) {
             active = true;
 
-            setTimeout(function () {
-                lazyGraphs.forEach(function (lazyGraph) {
+            setTimeout(function() {
+                lazyGraphs.forEach(function(lazyGraph) {
                     if (
                         lazyGraph.getBoundingClientRect().top <= window.innerHeight &&
                         lazyGraph.getBoundingClientRect().bottom >= 0 &&
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         lazyGraph.data = lazyGraph.getAttribute('lazy');
                         lazyGraph.removeAttribute('lazy');
 
-                        lazyGraphs = lazyGraphs.filter(function (image) { return image !== lazyGraph });
+                        lazyGraphs = lazyGraphs.filter(function(image) { return image !== lazyGraph});
 
                         if (lazyGraphs.length === 0) {
                             document.removeEventListener('scroll', lazyLoad);
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
+    // initial load
     lazyLoad();
 
     var container = document.querySelector('.container-fluid.modules');

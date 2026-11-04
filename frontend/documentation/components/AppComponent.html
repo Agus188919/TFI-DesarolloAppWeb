@@ -191,43 +191,191 @@
             <tr>
                 <td class="col-md-3">styles</td>
                 <td class="col-md-9"><code>
+    :host {
+      /* Variables heredadas del diseño general */
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #0284c7;
+      --danger: #ef4444;
+      --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      
+      display: block;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      font-family: inherit;
+    }
+
+    :host-context(.dark),
+    :host-context([data-theme&#x3D;&quot;dark&quot;]) {
+      --bg-page: #0b1329;
+      --bg-card: #151f38;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #263353;
+      --primary: #38bdf8;
+      --nav-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar Moderno */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1e293b;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      font-family: Arial, sans-serif;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 2rem;
+      box-shadow: var(--nav-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
-    .nav-brand { font-size: 1.2rem; font-weight: bold; }
-    .nav-user { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
-    .btn-logout {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-icon { font-size: 1.5rem; }
+    .brand-text { font-size: 1.15rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Botón Theme */
+    .btn-theme {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
     }
-    .btn-logout:hover { background: #dc2626; }
-    .container { padding: 1.5rem; max-width: 1000px; margin: 0 auto; font-family: Arial, sans-serif; }
+    .btn-theme:hover { background-color: var(--border-color); transform: scale(1.05); }
+
+    .divider { width: 1px; height: 24px; background-color: var(--border-color); }
+
+    /* Info Usuario */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .user-details { display: flex; flex-direction: column; line-height: 1.2; }
+    .user-name { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+    .user-role { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Logout */
+    .btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+    .btn-logout:hover { background: var(--danger); color: white; }
+
+    /* Se removió max-width estricto del main para que el panel hijo gestione su propio ancho fluido */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    @media (max-width: 600px) {
+      .user-details { display: none; }
+      .logout-text { display: none; }
+      .navbar { padding: 0.75rem 1rem; }
+    }
   </code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">template</td>
-                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;navbar&quot; *ngIf&#x3D;&quot;authService.isAuthenticated()&quot;&gt;
-  &lt;div class&#x3D;&quot;nav-brand&quot;&gt;🏥 Clínica Médica&lt;/div&gt;
-  &lt;div class&#x3D;&quot;nav-user&quot;&gt;
-    &lt;span&gt;&lt;b&gt;{{ usuario?.nombres }} {{ usuario?.apellidos }}&lt;/b&gt; ({{ usuario?.rol }})&lt;/span&gt;
-    &lt;button class&#x3D;&quot;btn-logout&quot; (click)&#x3D;&quot;authService.logout()&quot;&gt;Cerrar Sesión&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;
-&lt;main class&#x3D;&quot;container&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;/main&gt;
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;app-layout&quot;&gt;
+  &lt;!-- Navbar superior (Solo visible si hay sesión) --&gt;
+  &lt;header class&#x3D;&quot;navbar&quot; *ngIf&#x3D;&quot;authService.isAuthenticated()&quot;&gt;
+    &lt;div class&#x3D;&quot;nav-brand&quot;&gt;
+      &lt;span class&#x3D;&quot;brand-icon&quot;&gt;CM |&lt;/span&gt;
+      &lt;span class&#x3D;&quot;brand-text&quot;&gt;Clínica Médica&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;nav-actions&quot;&gt;
+      &lt;!-- Toggle Dark Mode --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        class&#x3D;&quot;btn-theme&quot;
+        (click)&#x3D;&quot;themeService.toggleTheme()&quot;
+        [title]&#x3D;&quot;themeService.isDarkMode() ? &#x27;Cambiar a modo claro&#x27; : &#x27;Cambiar a modo oscuro&#x27;&quot;
+      &gt;
+        {{ themeService.isDarkMode() ? &#x27;☀️&#x27; : &#x27;🌙&#x27; }}
+      &lt;/button&gt;
+
+      &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+
+      &lt;!-- Perfil Usuario --&gt;
+      &lt;div class&#x3D;&quot;user-profile&quot;&gt;
+        &lt;div class&#x3D;&quot;avatar-circle&quot;&gt;
+          {{ getIniciales() }}
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;user-details&quot;&gt;
+          &lt;span class&#x3D;&quot;user-name&quot;&gt;{{ usuario?.nombres }} {{ usuario?.apellidos }}&lt;/span&gt;
+          &lt;span class&#x3D;&quot;user-role&quot;&gt;{{ usuario?.rol }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Botón de Salida --&gt;
+      &lt;button class&#x3D;&quot;btn-logout&quot; (click)&#x3D;&quot;authService.logout()&quot; title&#x3D;&quot;Cerrar Sesión&quot;&gt;
+        &lt;span class&#x3D;&quot;logout-text&quot;&gt;Salir&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Contenedor Principal (El enrutador inyecta aquí Login o Panel) --&gt;
+  &lt;main class&#x3D;&quot;main-container&quot;&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  &lt;/main&gt;
+&lt;/div&gt;
 </code></pre></td>
             </tr>
 
@@ -283,12 +431,34 @@
                                     <span class="modifier">Public</span>
                                 <a href="#authService" >authService</a>
                             </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#themeService" >themeService</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
             </tbody>
         </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getIniciales" >getIniciales</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 
 
@@ -319,12 +489,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, themeService: <a href="../injectables/ThemeService.html" target="_self">ThemeService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/app.component.ts:197</a></div>
                             </td>
                         </tr>
 
@@ -353,6 +523,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>themeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ThemeService.html" target="_self" >ThemeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -366,6 +548,49 @@
 
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getIniciales"></a>
+                    <span class="name">
+                        <span ><b>getIniciales</b></span>
+                        <a href="#getIniciales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getIniciales()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/app.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
     <section data-compodoc="block-properties">
     
@@ -392,7 +617,34 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/app.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/app/app.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="themeService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>themeService</b></span>
+                        <a href="#themeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ThemeService.html" target="_self" >ThemeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/app.component.ts:200</a></div>
                         </td>
                     </tr>
 
@@ -421,7 +673,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/app.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/app.component.ts:203</a></div>
                                 </td>
                             </tr>
 
@@ -436,82 +688,357 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
 import { AuthService } from &#x27;./services/auth.service&#x27;;
+import { ThemeService } from &#x27;./services/theme.service&#x27;; // Asegurate de importar el ThemeService
 
 @Component({
-    selector: &#x27;app-root&#x27;,
-    standalone: true,
-    imports: [CommonModule, RouterOutlet],
-    template: &#x60;
-    &lt;nav class&#x3D;&quot;navbar&quot; *ngIf&#x3D;&quot;authService.isAuthenticated()&quot;&gt;
-      &lt;div class&#x3D;&quot;nav-brand&quot;&gt;🏥 Clínica Médica&lt;/div&gt;
-      &lt;div class&#x3D;&quot;nav-user&quot;&gt;
-        &lt;span&gt;&lt;b&gt;{{ usuario?.nombres }} {{ usuario?.apellidos }}&lt;/b&gt; ({{ usuario?.rol }})&lt;/span&gt;
-        &lt;button class&#x3D;&quot;btn-logout&quot; (click)&#x3D;&quot;authService.logout()&quot;&gt;Cerrar Sesión&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/nav&gt;
-    &lt;main class&#x3D;&quot;container&quot;&gt;
-      &lt;router-outlet&gt;&lt;/router-outlet&gt;
-    &lt;/main&gt;
+  selector: &#x27;app-root&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterOutlet],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;app-layout&quot;&gt;
+      &lt;!-- Navbar superior (Solo visible si hay sesión) --&gt;
+      &lt;header class&#x3D;&quot;navbar&quot; *ngIf&#x3D;&quot;authService.isAuthenticated()&quot;&gt;
+        &lt;div class&#x3D;&quot;nav-brand&quot;&gt;
+          &lt;span class&#x3D;&quot;brand-icon&quot;&gt;CM |&lt;/span&gt;
+          &lt;span class&#x3D;&quot;brand-text&quot;&gt;Clínica Médica&lt;/span&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;nav-actions&quot;&gt;
+          &lt;!-- Toggle Dark Mode --&gt;
+          &lt;button 
+            type&#x3D;&quot;button&quot; 
+            class&#x3D;&quot;btn-theme&quot; 
+            (click)&#x3D;&quot;themeService.toggleTheme()&quot;
+            [title]&#x3D;&quot;themeService.isDarkMode() ? &#x27;Cambiar a modo claro&#x27; : &#x27;Cambiar a modo oscuro&#x27;&quot;
+          &gt;
+            {{ themeService.isDarkMode() ? &#x27;☀️&#x27; : &#x27;🌙&#x27; }}
+          &lt;/button&gt;
+
+          &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+
+          &lt;!-- Perfil Usuario --&gt;
+          &lt;div class&#x3D;&quot;user-profile&quot;&gt;
+            &lt;div class&#x3D;&quot;avatar-circle&quot;&gt;
+              {{ getIniciales() }}
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;user-details&quot;&gt;
+              &lt;span class&#x3D;&quot;user-name&quot;&gt;{{ usuario?.nombres }} {{ usuario?.apellidos }}&lt;/span&gt;
+              &lt;span class&#x3D;&quot;user-role&quot;&gt;{{ usuario?.rol }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Botón de Salida --&gt;
+          &lt;button class&#x3D;&quot;btn-logout&quot; (click)&#x3D;&quot;authService.logout()&quot; title&#x3D;&quot;Cerrar Sesión&quot;&gt;
+            &lt;span class&#x3D;&quot;logout-text&quot;&gt;Salir&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+
+      &lt;!-- Contenedor Principal (El enrutador inyecta aquí Login o Panel) --&gt;
+      &lt;main class&#x3D;&quot;main-container&quot;&gt;
+        &lt;router-outlet&gt;&lt;/router-outlet&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
   &#x60;,
-    styles: [&#x60;
+  styles: [&#x60;
+    :host {
+      /* Variables heredadas del diseño general */
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #0284c7;
+      --danger: #ef4444;
+      --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      
+      display: block;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      font-family: inherit;
+    }
+
+    :host-context(.dark),
+    :host-context([data-theme&#x3D;&quot;dark&quot;]) {
+      --bg-page: #0b1329;
+      --bg-card: #151f38;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #263353;
+      --primary: #38bdf8;
+      --nav-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar Moderno */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1e293b;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      font-family: Arial, sans-serif;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 2rem;
+      box-shadow: var(--nav-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
-    .nav-brand { font-size: 1.2rem; font-weight: bold; }
-    .nav-user { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
-    .btn-logout {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-icon { font-size: 1.5rem; }
+    .brand-text { font-size: 1.15rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Botón Theme */
+    .btn-theme {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
     }
-    .btn-logout:hover { background: #dc2626; }
-    .container { padding: 1.5rem; max-width: 1000px; margin: 0 auto; font-family: Arial, sans-serif; }
-  &#x60;],
+    .btn-theme:hover { background-color: var(--border-color); transform: scale(1.05); }
+
+    .divider { width: 1px; height: 24px; background-color: var(--border-color); }
+
+    /* Info Usuario */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .user-details { display: flex; flex-direction: column; line-height: 1.2; }
+    .user-name { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+    .user-role { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Logout */
+    .btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+    .btn-logout:hover { background: var(--danger); color: white; }
+
+    /* Se removió max-width estricto del main para que el panel hijo gestione su propio ancho fluido */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    @media (max-width: 600px) {
+      .user-details { display: none; }
+      .logout-text { display: none; }
+      .navbar { padding: 0.75rem 1rem; }
+    }
+  &#x60;]
 })
 export class AppComponent {
-    constructor(public authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    public themeService: ThemeService
+  ) { }
 
-    get usuario() {
-        return this.authService.getUsuario();
-    }
+  get usuario() {
+    return this.authService.getUsuario();
+  }
+
+  // Genera iniciales (ej: Juan Pérez -&gt; JP) para el avatar circular
+  getIniciales(): string {
+    const u &#x3D; this.usuario;
+    if (!u) return &#x27;👤&#x27;;
+    const inicialNombre &#x3D; u.nombres ? u.nombres.charAt(0) : &#x27;&#x27;;
+    const inicialApellido &#x3D; u.apellidos ? u.apellidos.charAt(0) : &#x27;&#x27;;
+    return (inicialNombre + inicialApellido).toUpperCase() || &#x27;U&#x27;;
+  }
 }</code></pre>
     </div>
 
 
     <div class="tab-pane fade " id="styleData">
             <pre class="line-numbers"><code class="language-scss">
+    :host {
+      /* Variables heredadas del diseño general */
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #0284c7;
+      --danger: #ef4444;
+      --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      
+      display: block;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      font-family: inherit;
+    }
+
+    :host-context(.dark),
+    :host-context([data-theme&#x3D;&quot;dark&quot;]) {
+      --bg-page: #0b1329;
+      --bg-card: #151f38;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #263353;
+      --primary: #38bdf8;
+      --nav-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar Moderno */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1e293b;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      font-family: Arial, sans-serif;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 2rem;
+      box-shadow: var(--nav-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
-    .nav-brand { font-size: 1.2rem; font-weight: bold; }
-    .nav-user { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
-    .btn-logout {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-icon { font-size: 1.5rem; }
+    .brand-text { font-size: 1.15rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    /* Botón Theme */
+    .btn-theme {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
     }
-    .btn-logout:hover { background: #dc2626; }
-    .container { padding: 1.5rem; max-width: 1000px; margin: 0 auto; font-family: Arial, sans-serif; }
+    .btn-theme:hover { background-color: var(--border-color); transform: scale(1.05); }
+
+    .divider { width: 1px; height: 24px; background-color: var(--border-color); }
+
+    /* Info Usuario */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .user-details { display: flex; flex-direction: column; line-height: 1.2; }
+    .user-name { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+    .user-role { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Logout */
+    .btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+    .btn-logout:hover { background: var(--danger); color: white; }
+
+    /* Se removió max-width estricto del main para que el panel hijo gestione su propio ancho fluido */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    @media (max-width: 600px) {
+      .user-details { display: none; }
+      .logout-text { display: none; }
+      .navbar { padding: 0.75rem 1rem; }
+    }
   
 </code></pre>
     </div>
@@ -541,8 +1068,8 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="navbar" *ngIf="authService.isAuthenticated()">  <div class="nav-brand">🏥 Clínica Médica</div>  <div class="nav-user">    <span><b>{{ usuario?.nombres }} {{ usuario?.apellidos }}</b> ({{ usuario?.rol }})</span>    <button class="btn-logout" (click)="authService.logout()">Cerrar Sesión</button>  </div></nav><main class="container">  <router-outlet></router-outlet></main></div>'
-    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'Login', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PanelAdminComponent', 'selector': 'app-panel-admin'},{'name': 'PanelMedicoComponent', 'selector': 'app-panel-medico'},{'name': 'PanelPacienteComponent', 'selector': 'app-panel-paciente'}];
+        var COMPONENT_TEMPLATE = '<div><div class="app-layout">  <!-- Navbar superior (Solo visible si hay sesión) -->  <header class="navbar" *ngIf="authService.isAuthenticated()">    <div class="nav-brand">      <span class="brand-icon">CM |</span>      <span class="brand-text">Clínica Médica</span>    </div>    <div class="nav-actions">      <!-- Toggle Dark Mode -->      <button        type="button"        class="btn-theme"        (click)="themeService.toggleTheme()"        [title]="themeService.isDarkMode() ? \'Cambiar a modo claro\' : \'Cambiar a modo oscuro\'"      >        {{ themeService.isDarkMode() ? \'☀️\' : \'🌙\' }}      </button>      <div class="divider"></div>      <!-- Perfil Usuario -->      <div class="user-profile">        <div class="avatar-circle">          {{ getIniciales() }}        </div>        <div class="user-details">          <span class="user-name">{{ usuario?.nombres }} {{ usuario?.apellidos }}</span>          <span class="user-role">{{ usuario?.rol }}</span>        </div>      </div>      <!-- Botón de Salida -->      <button class="btn-logout" (click)="authService.logout()" title="Cerrar Sesión">        <span class="logout-text">Salir</span>      </button>    </div>  </header>  <!-- Contenedor Principal (El enrutador inyecta aquí Login o Panel) -->  <main class="main-container">    <router-outlet></router-outlet>  </main></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'Login', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PanelAdminComponent', 'selector': 'app-panel-admin'},{'name': 'PanelMedicoComponent', 'selector': 'app-panel-medico'},{'name': 'PanelPacienteComponent', 'selector': 'app-panel-paciente'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

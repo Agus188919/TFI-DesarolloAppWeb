@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function foundLazyModuleWithPath(path) {
+        //path is like app/customers/customers.module#CustomersModule
         var split = path.split('#'),
             lazyModulePath = split[0],
             lazyModuleName = split[1];
@@ -169,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+    //Node icon
     infos_group
         .append('text')
         .attr('font-family', 'Ionicons')
@@ -184,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return '\uf183';
         });
 
+    //node infos
     infos_group
         .append('svg:text')
         .attr('x', function (d) {

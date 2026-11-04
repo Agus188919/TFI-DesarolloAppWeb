@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var entityLogo = entityLogos[i];
             if (entityLogo) {
                 var url = entityLogo.getAttribute('data-src');
+                // Dark mode + logo
                 let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (isDarkMode && url.indexOf('compodoc') !== -1) {
                     url = 'images/compodoc-vectorise-inverted.png';
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // collapse menu
         var classnameMenuToggler = document.getElementsByClassName('menu-toggler'),
             faAngleUpClass = 'ion-ios-arrow-up',
             faAngleDownClass = 'ion-ios-arrow-down',
@@ -181,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
             classnameMenuToggler[i].addEventListener('click', toggleItemMenu, false);
         }
 
+        // Scroll to active link
         var menus = document.querySelectorAll('.menu'),
             i = 0,
             len = menus.length,
@@ -219,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                     if (linkContext && linkContext === 'sub-entity') {
+                        // Toggle also the master parent menu
                         var linkContextId = activeLink.getAttribute('data-context-id');
                         var toggler = activeMenu.querySelector(
                             '.chapter.' + linkContextId + ' a .menu-toggler'
