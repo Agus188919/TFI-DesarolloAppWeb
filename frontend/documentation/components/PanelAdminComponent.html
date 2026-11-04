@@ -1,0 +1,1819 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontend documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PanelAdminComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/components/panel-admin/panel-admin.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-panel-admin</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+    .panel-container { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+    .card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .data-table th, .data-table td { border-bottom: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
+    .btn-primary { background: #0284c7; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-primary:hover { background: #0369a1; }
+    .btn-cancel { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-cancel:hover { background: #dc2626; }
+    .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge.activo { background: #e0f2fe; color: #0369a1; }
+    .badge.atendido { background: #dcfce7; color: #15803d; }
+    .badge.ausente { background: #fef3c7; color: #b45309; }
+    .badge.cancelado { background: #fee2e2; color: #b91c1c; }
+    .muted { color: #64748b; font-style: italic; }
+
+    /* Modales Emergentes */
+    .modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center;
+      align-items: center; z-index: 1000;
+    }
+    .modal-box {
+      background: white; padding: 1.5rem 2rem; border-radius: 8px; width: 90%;
+      max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: fadeIn 0.15s ease-out;
+    }
+    .modal-box h4 { margin-top: 0; margin-bottom: 0.5rem; color: #0f172a; }
+    .modal-highlight { font-size: 1.1rem; color: #0284c7; margin: 0.5rem 0; }
+    .modal-subtext { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
+    .btn-secondary { background: #e2e8f0; color: #334155; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-danger { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-danger:hover { background: #dc2626; }
+    .modal-box.exito h4 { color: #15803d; }
+    .modal-box.error h4 { color: #b91c1c; }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;panel-container&quot;&gt;
+  &lt;h2&gt;Panel de Administración de la Clínica&lt;/h2&gt;
+
+  &lt;!-- Gestión de Aranceles Médicos --&gt;
+  &lt;section class&#x3D;&quot;card&quot;&gt;
+    &lt;h3&gt;Aranceles de Consultas Médicas&lt;/h3&gt;
+    &lt;table class&#x3D;&quot;data-table&quot;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Médico&lt;/th&gt;
+          &lt;th&gt;Matrícula&lt;/th&gt;
+          &lt;th&gt;Arancel Actual&lt;/th&gt;
+          &lt;th&gt;Nuevo Arancel&lt;/th&gt;
+          &lt;th&gt;Acción&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor&#x3D;&quot;let m of medicos&quot;&gt;
+          &lt;td&gt;Dr. {{ m.usuario.nombres }} {{ m.usuario.apellidos }}&lt;/td&gt;
+          &lt;td&gt;{{ m.matricula }}&lt;/td&gt;
+          &lt;td&gt;$ {{ m.valor_consulta }}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;input
+              type&#x3D;&quot;number&quot;
+              [(ngModel)]&#x3D;&quot;nuevosValores[m.id]&quot;
+              placeholder&#x3D;&quot;Monto&quot;
+              min&#x3D;&quot;1&quot;
+              style&#x3D;&quot;width: 110px; padding: 0.35rem; border: 1px solid #ccc; border-radius: 4px;&quot;
+            /&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;abrirModalActualizarArancel(m)&quot;&gt;
+              Actualizar
+            &lt;/button&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/section&gt;
+
+  &lt;!-- Tabla Global de Reservas --&gt;
+  &lt;section class&#x3D;&quot;card&quot;&gt;
+    &lt;h3&gt;Todas las Reservas de la Clínica&lt;/h3&gt;
+    &lt;table *ngIf&#x3D;&quot;reservas.length &gt; 0; else sinReservas&quot; class&#x3D;&quot;data-table&quot;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;ID&lt;/th&gt;
+          &lt;th&gt;Fecha y Hora&lt;/th&gt;
+          &lt;th&gt;Paciente&lt;/th&gt;
+          &lt;th&gt;Médico&lt;/th&gt;
+          &lt;th&gt;Arancel Congelado&lt;/th&gt;
+          &lt;th&gt;Estado&lt;/th&gt;
+          &lt;th&gt;Acción&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor&#x3D;&quot;let r of reservas&quot;&gt;
+          &lt;td&gt;#{{ r.id }}&lt;/td&gt;
+          &lt;td&gt;{{ r.fecha_hora | date:&#x27;dd/MM/yyyy HH:mm&#x27; }} hs&lt;/td&gt;
+          &lt;td&gt;{{ r.paciente?.nombres }} {{ r.paciente?.apellidos }} (DNI: {{ r.paciente?.documento }})&lt;/td&gt;
+          &lt;td&gt;Dr. {{ r.medico?.usuario?.nombres }} {{ r.medico?.usuario?.apellidos }}&lt;/td&gt;
+          &lt;td&gt;$ {{ r.valor_consulta }}&lt;/td&gt;
+          &lt;td&gt;&lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;r.estado.toLowerCase()&quot;&gt;{{ r.estado }}&lt;/span&gt;&lt;/td&gt;
+          &lt;td&gt;
+            &lt;button
+              *ngIf&#x3D;&quot;r.estado &#x3D;&#x3D;&#x3D; estadoReserva.ACTIVO&quot;
+              class&#x3D;&quot;btn-cancel&quot;
+              (click)&#x3D;&quot;abrirModalCancelar(r.id)&quot;&gt;
+              Cancelar Turno
+            &lt;/button&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;ng-template #sinReservas&gt;
+      &lt;p class&#x3D;&quot;muted&quot;&gt;No hay reservas registradas en el sistema.&lt;/p&gt;
+    &lt;/ng-template&gt;
+  &lt;/section&gt;
+
+  &lt;!-- Modal de Confirmación para Actualizar Arancel --&gt;
+  &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;modalArancel.visible&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-box&quot;&gt;
+      &lt;h4&gt;Confirmar Nuevo Arancel&lt;/h4&gt;
+      &lt;p&gt;
+        ¿Confirma actualizar el valor de consulta para el
+        &lt;b&gt;Dr. {{ modalArancel.medico?.usuario?.nombres }} {{ modalArancel.medico?.usuario?.apellidos }}&lt;/b&gt;?
+      &lt;/p&gt;
+      &lt;p class&#x3D;&quot;modal-highlight&quot;&gt;
+        Nuevo monto: &lt;b&gt;$ {{ modalArancel.monto }}&lt;/b&gt;
+      &lt;/p&gt;
+      &lt;p class&#x3D;&quot;modal-subtext&quot;&gt;
+        Nota: Las reservas ya emitidas conservarán inalterado su valor original por política de congelamiento.
+      &lt;/p&gt;
+      &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+        &lt;button class&#x3D;&quot;btn-secondary&quot; (click)&#x3D;&quot;cerrarModalArancel()&quot;&gt;Volver&lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;confirmarActualizarArancel()&quot;&gt;Confirmar Cambio&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Modal de Confirmación para Cancelar Turno --&gt;
+  &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;modalCancelar.visible&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-box&quot;&gt;
+      &lt;h4&gt;Confirmar Cancelación de Turno&lt;/h4&gt;
+      &lt;p&gt;¿Está seguro de que desea cancelar el turno &lt;b&gt;#{{ modalCancelar.idReserva }}&lt;/b&gt;?&lt;/p&gt;
+      &lt;p class&#x3D;&quot;modal-subtext&quot;&gt;
+        Como Administrador, la cancelación está permitida hasta el momento exacto en que inicia la consulta.
+      &lt;/p&gt;
+      &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+        &lt;button class&#x3D;&quot;btn-secondary&quot; (click)&#x3D;&quot;cerrarModalCancelar()&quot;&gt;Volver&lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn-danger&quot; (click)&#x3D;&quot;confirmarCancelacion()&quot;&gt;Confirmar Cancelación&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Modal de Notificación (Éxito / Error) --&gt;
+  &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;popupNotificacion.visible&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-box&quot; [ngClass]&#x3D;&quot;popupNotificacion.tipo&quot;&gt;
+      &lt;h4&gt;{{ popupNotificacion.titulo }}&lt;/h4&gt;
+      &lt;p&gt;{{ popupNotificacion.mensaje }}&lt;/p&gt;
+      &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+        &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;cerrarNotificacion()&quot;&gt;Aceptar&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#estadoReserva" >estadoReserva</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#medicos" >medicos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#modalArancel" >modalArancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#modalCancelar" >modalCancelar</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#nuevosValores" >nuevosValores</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#popupNotificacion" >popupNotificacion</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#reservas" >reservas</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#abrirModalActualizarArancel" >abrirModalActualizarArancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#abrirModalCancelar" >abrirModalCancelar</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cargarDatos" >cargarDatos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cerrarModalArancel" >cerrarModalArancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cerrarModalCancelar" >cerrarModalCancelar</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cerrarNotificacion" >cerrarNotificacion</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#confirmarActualizarArancel" >confirmarActualizarArancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#confirmarCancelacion" >confirmarCancelacion</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#mostrarPopup" >mostrarPopup</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(medicosService: <a href="../injectables/MedicosService.html" target="_self">MedicosService</a>, reservasService: <a href="../injectables/ReservasService.html" target="_self">ReservasService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:209</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>medicosService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MedicosService.html" target="_self" >MedicosService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>reservasService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ReservasService.html" target="_self" >ReservasService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="abrirModalActualizarArancel"></a>
+                    <span class="name">
+                        <span ><b>abrirModalActualizarArancel</b></span>
+                        <a href="#abrirModalActualizarArancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>abrirModalActualizarArancel(medico: <a href="../interfaces/Medico.html" target="_self">Medico</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>medico</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Medico.html" target="_self" >Medico</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="abrirModalCancelar"></a>
+                    <span class="name">
+                        <span ><b>abrirModalCancelar</b></span>
+                        <a href="#abrirModalCancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>abrirModalCancelar(idReserva: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>idReserva</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarDatos"></a>
+                    <span class="name">
+                        <span ><b>cargarDatos</b></span>
+                        <a href="#cargarDatos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarDatos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarModalArancel"></a>
+                    <span class="name">
+                        <span ><b>cerrarModalArancel</b></span>
+                        <a href="#cerrarModalArancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cerrarModalArancel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarModalCancelar"></a>
+                    <span class="name">
+                        <span ><b>cerrarModalCancelar</b></span>
+                        <a href="#cerrarModalCancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cerrarModalCancelar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="279"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:279</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarNotificacion"></a>
+                    <span class="name">
+                        <span ><b>cerrarNotificacion</b></span>
+                        <a href="#cerrarNotificacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cerrarNotificacion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="311"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:311</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarActualizarArancel"></a>
+                    <span class="name">
+                        <span ><b>confirmarActualizarArancel</b></span>
+                        <a href="#confirmarActualizarArancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarActualizarArancel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:251</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarCancelacion"></a>
+                    <span class="name">
+                        <span ><b>confirmarCancelacion</b></span>
+                        <a href="#confirmarCancelacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarCancelacion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="284"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:284</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarPopup"></a>
+                    <span class="name">
+                        <span ><b>mostrarPopup</b></span>
+                        <a href="#mostrarPopup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mostrarPopup(titulo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mensaje: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tipo: "exito" | "error")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="302"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:302</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>titulo</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>mensaje</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>tipo</td>
+                                            <td>
+                                                        <code>&quot;exito&quot; | &quot;error&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;exito&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estadoReserva"></a>
+                    <span class="name">
+                        <span ><b>estadoReserva</b></span>
+                        <a href="#estadoReserva"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>EstadoReserva</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicos"></a>
+                    <span class="name">
+                        <span ><b>medicos</b></span>
+                        <a href="#medicos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Medico.html" target="_self" >Medico[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalArancel"></a>
+                    <span class="name">
+                        <span ><b>modalArancel</b></span>
+                        <a href="#modalArancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    visible: false,
+    medico: null as Medico | null,
+    monto: 0
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalCancelar"></a>
+                    <span class="name">
+                        <span ><b>modalCancelar</b></span>
+                        <a href="#modalCancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    visible: false,
+    idReserva: null as number | null
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nuevosValores"></a>
+                    <span class="name">
+                        <span ><b>nuevosValores</b></span>
+                        <a href="#nuevosValores"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>{  }</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="popupNotificacion"></a>
+                    <span class="name">
+                        <span ><b>popupNotificacion</b></span>
+                        <a href="#popupNotificacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    visible: false,
+    tipo: &#x27;exito&#x27;,
+    titulo: &#x27;&#x27;,
+    mensaje: &#x27;&#x27;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:204</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservas"></a>
+                    <span class="name">
+                        <span ><b>reservas</b></span>
+                        <a href="#reservas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Reserva.html" target="_self" >Reserva[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/components/panel-admin/panel-admin.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MedicosService } from &#x27;../../services/medicos.service&#x27;;
+import { ReservasService } from &#x27;../../services/reservas.service&#x27;;
+import { Medico, Reserva, EstadoReserva } from &#x27;../../models/types&#x27;;
+
+@Component({
+  selector: &#x27;app-panel-admin&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;panel-container&quot;&gt;
+      &lt;h2&gt;Panel de Administración de la Clínica&lt;/h2&gt;
+
+      &lt;!-- Gestión de Aranceles Médicos --&gt;
+      &lt;section class&#x3D;&quot;card&quot;&gt;
+        &lt;h3&gt;Aranceles de Consultas Médicas&lt;/h3&gt;
+        &lt;table class&#x3D;&quot;data-table&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Médico&lt;/th&gt;
+              &lt;th&gt;Matrícula&lt;/th&gt;
+              &lt;th&gt;Arancel Actual&lt;/th&gt;
+              &lt;th&gt;Nuevo Arancel&lt;/th&gt;
+              &lt;th&gt;Acción&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr *ngFor&#x3D;&quot;let m of medicos&quot;&gt;
+              &lt;td&gt;Dr. {{ m.usuario.nombres }} {{ m.usuario.apellidos }}&lt;/td&gt;
+              &lt;td&gt;{{ m.matricula }}&lt;/td&gt;
+              &lt;td&gt;$ {{ m.valor_consulta }}&lt;/td&gt;
+              &lt;td&gt;
+                &lt;input 
+                  type&#x3D;&quot;number&quot; 
+                  [(ngModel)]&#x3D;&quot;nuevosValores[m.id]&quot; 
+                  placeholder&#x3D;&quot;Monto&quot; 
+                  min&#x3D;&quot;1&quot;
+                  style&#x3D;&quot;width: 110px; padding: 0.35rem; border: 1px solid #ccc; border-radius: 4px;&quot; 
+                /&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;abrirModalActualizarArancel(m)&quot;&gt;
+                  Actualizar
+                &lt;/button&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/section&gt;
+
+      &lt;!-- Tabla Global de Reservas --&gt;
+      &lt;section class&#x3D;&quot;card&quot;&gt;
+        &lt;h3&gt;Todas las Reservas de la Clínica&lt;/h3&gt;
+        &lt;table *ngIf&#x3D;&quot;reservas.length &gt; 0; else sinReservas&quot; class&#x3D;&quot;data-table&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;ID&lt;/th&gt;
+              &lt;th&gt;Fecha y Hora&lt;/th&gt;
+              &lt;th&gt;Paciente&lt;/th&gt;
+              &lt;th&gt;Médico&lt;/th&gt;
+              &lt;th&gt;Arancel Congelado&lt;/th&gt;
+              &lt;th&gt;Estado&lt;/th&gt;
+              &lt;th&gt;Acción&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr *ngFor&#x3D;&quot;let r of reservas&quot;&gt;
+              &lt;td&gt;#{{ r.id }}&lt;/td&gt;
+              &lt;td&gt;{{ r.fecha_hora | date:&#x27;dd/MM/yyyy HH:mm&#x27; }} hs&lt;/td&gt;
+              &lt;td&gt;{{ r.paciente?.nombres }} {{ r.paciente?.apellidos }} (DNI: {{ r.paciente?.documento }})&lt;/td&gt;
+              &lt;td&gt;Dr. {{ r.medico?.usuario?.nombres }} {{ r.medico?.usuario?.apellidos }}&lt;/td&gt;
+              &lt;td&gt;$ {{ r.valor_consulta }}&lt;/td&gt;
+              &lt;td&gt;&lt;span class&#x3D;&quot;badge&quot; [ngClass]&#x3D;&quot;r.estado.toLowerCase()&quot;&gt;{{ r.estado }}&lt;/span&gt;&lt;/td&gt;
+              &lt;td&gt;
+                &lt;button
+                  *ngIf&#x3D;&quot;r.estado &#x3D;&#x3D;&#x3D; estadoReserva.ACTIVO&quot;
+                  class&#x3D;&quot;btn-cancel&quot;
+                  (click)&#x3D;&quot;abrirModalCancelar(r.id)&quot;&gt;
+                  Cancelar Turno
+                &lt;/button&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;ng-template #sinReservas&gt;
+          &lt;p class&#x3D;&quot;muted&quot;&gt;No hay reservas registradas en el sistema.&lt;/p&gt;
+        &lt;/ng-template&gt;
+      &lt;/section&gt;
+
+      &lt;!-- Modal de Confirmación para Actualizar Arancel --&gt;
+      &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;modalArancel.visible&quot;&gt;
+        &lt;div class&#x3D;&quot;modal-box&quot;&gt;
+          &lt;h4&gt;Confirmar Nuevo Arancel&lt;/h4&gt;
+          &lt;p&gt;
+            ¿Confirma actualizar el valor de consulta para el 
+            &lt;b&gt;Dr. {{ modalArancel.medico?.usuario?.nombres }} {{ modalArancel.medico?.usuario?.apellidos }}&lt;/b&gt;?
+          &lt;/p&gt;
+          &lt;p class&#x3D;&quot;modal-highlight&quot;&gt;
+            Nuevo monto: &lt;b&gt;$ {{ modalArancel.monto }}&lt;/b&gt;
+          &lt;/p&gt;
+          &lt;p class&#x3D;&quot;modal-subtext&quot;&gt;
+            Nota: Las reservas ya emitidas conservarán inalterado su valor original por política de congelamiento.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+            &lt;button class&#x3D;&quot;btn-secondary&quot; (click)&#x3D;&quot;cerrarModalArancel()&quot;&gt;Volver&lt;/button&gt;
+            &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;confirmarActualizarArancel()&quot;&gt;Confirmar Cambio&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal de Confirmación para Cancelar Turno --&gt;
+      &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;modalCancelar.visible&quot;&gt;
+        &lt;div class&#x3D;&quot;modal-box&quot;&gt;
+          &lt;h4&gt;Confirmar Cancelación de Turno&lt;/h4&gt;
+          &lt;p&gt;¿Está seguro de que desea cancelar el turno &lt;b&gt;#{{ modalCancelar.idReserva }}&lt;/b&gt;?&lt;/p&gt;
+          &lt;p class&#x3D;&quot;modal-subtext&quot;&gt;
+            Como Administrador, la cancelación está permitida hasta el momento exacto en que inicia la consulta.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+            &lt;button class&#x3D;&quot;btn-secondary&quot; (click)&#x3D;&quot;cerrarModalCancelar()&quot;&gt;Volver&lt;/button&gt;
+            &lt;button class&#x3D;&quot;btn-danger&quot; (click)&#x3D;&quot;confirmarCancelacion()&quot;&gt;Confirmar Cancelación&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal de Notificación (Éxito / Error) --&gt;
+      &lt;div class&#x3D;&quot;modal-backdrop&quot; *ngIf&#x3D;&quot;popupNotificacion.visible&quot;&gt;
+        &lt;div class&#x3D;&quot;modal-box&quot; [ngClass]&#x3D;&quot;popupNotificacion.tipo&quot;&gt;
+          &lt;h4&gt;{{ popupNotificacion.titulo }}&lt;/h4&gt;
+          &lt;p&gt;{{ popupNotificacion.mensaje }}&lt;/p&gt;
+          &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
+            &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;cerrarNotificacion()&quot;&gt;Aceptar&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [&#x60;
+    .panel-container { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+    .card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .data-table th, .data-table td { border-bottom: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
+    .btn-primary { background: #0284c7; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-primary:hover { background: #0369a1; }
+    .btn-cancel { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-cancel:hover { background: #dc2626; }
+    .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge.activo { background: #e0f2fe; color: #0369a1; }
+    .badge.atendido { background: #dcfce7; color: #15803d; }
+    .badge.ausente { background: #fef3c7; color: #b45309; }
+    .badge.cancelado { background: #fee2e2; color: #b91c1c; }
+    .muted { color: #64748b; font-style: italic; }
+
+    /* Modales Emergentes */
+    .modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center;
+      align-items: center; z-index: 1000;
+    }
+    .modal-box {
+      background: white; padding: 1.5rem 2rem; border-radius: 8px; width: 90%;
+      max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: fadeIn 0.15s ease-out;
+    }
+    .modal-box h4 { margin-top: 0; margin-bottom: 0.5rem; color: #0f172a; }
+    .modal-highlight { font-size: 1.1rem; color: #0284c7; margin: 0.5rem 0; }
+    .modal-subtext { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
+    .btn-secondary { background: #e2e8f0; color: #334155; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-danger { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-danger:hover { background: #dc2626; }
+    .modal-box.exito h4 { color: #15803d; }
+    .modal-box.error h4 { color: #b91c1c; }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  &#x60;]
+})
+export class PanelAdminComponent implements OnInit {
+  medicos: Medico[] &#x3D; [];
+  reservas: Reserva[] &#x3D; [];
+  nuevosValores: { [key: number]: number } &#x3D; {};
+  estadoReserva &#x3D; EstadoReserva;
+
+  // Estado del Modal de Arancel
+  modalArancel &#x3D; {
+    visible: false,
+    medico: null as Medico | null,
+    monto: 0
+  };
+
+  // Estado del Modal de Cancelación
+  modalCancelar &#x3D; {
+    visible: false,
+    idReserva: null as number | null
+  };
+
+  // Estado del Popup de Notificación
+  popupNotificacion &#x3D; {
+    visible: false,
+    tipo: &#x27;exito&#x27;,
+    titulo: &#x27;&#x27;,
+    mensaje: &#x27;&#x27;
+  };
+
+  constructor(
+    private medicosService: MedicosService,
+    private reservasService: ReservasService
+  ) { }
+
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  cargarDatos(): void {
+    this.medicosService.listarTodos().subscribe({
+      next: (data) &#x3D;&gt; (this.medicos &#x3D; data),
+      error: (err) &#x3D;&gt; console.error(err)
+    });
+    this.reservasService.listarReservas().subscribe({
+      next: (data) &#x3D;&gt; (this.reservas &#x3D; data),
+      error: (err) &#x3D;&gt; console.error(err)
+    });
+  }
+
+  abrirModalActualizarArancel(medico: Medico): void {
+    const nuevoValor &#x3D; this.nuevosValores[medico.id];
+    if (!nuevoValor || nuevoValor &lt;&#x3D; 0) {
+      this.mostrarPopup(&#x27;Monto Inválido&#x27;, &#x27;Debe ingresar un monto numérico mayor a 0.&#x27;, &#x27;error&#x27;);
+      return;
+    }
+
+    this.modalArancel &#x3D; {
+      visible: true,
+      medico,
+      monto: nuevoValor
+    };
+  }
+
+  cerrarModalArancel(): void {
+    this.modalArancel.visible &#x3D; false;
+    this.modalArancel.medico &#x3D; null;
+    this.modalArancel.monto &#x3D; 0;
+  }
+
+  confirmarActualizarArancel(): void {
+    const medico &#x3D; this.modalArancel.medico;
+    const monto &#x3D; this.modalArancel.monto;
+    if (!medico) return;
+
+    this.cerrarModalArancel();
+
+    this.medicosService.actualizarArancel(medico.id, monto).subscribe({
+      next: () &#x3D;&gt; {
+        // Limpiar el campo de entrada del precio
+        delete this.nuevosValores[medico.id];
+        this.mostrarPopup(&#x27;Arancel Actualizado&#x27;, &#x60;El valor de consulta del Dr. ${medico.usuario.apellidos} fue actualizado a $${monto}.&#x60;, &#x27;exito&#x27;);
+        this.cargarDatos();
+      },
+      error: (err) &#x3D;&gt; {
+        const msg &#x3D; err.error?.message || &#x27;Error al actualizar el arancel del médico.&#x27;;
+        this.mostrarPopup(&#x27;Error al Actualizar&#x27;, msg, &#x27;error&#x27;);
+      }
+    });
+  }
+
+  abrirModalCancelar(idReserva: number): void {
+    this.modalCancelar &#x3D; {
+      visible: true,
+      idReserva
+    };
+  }
+
+  cerrarModalCancelar(): void {
+    this.modalCancelar.visible &#x3D; false;
+    this.modalCancelar.idReserva &#x3D; null;
+  }
+
+  confirmarCancelacion(): void {
+    const id &#x3D; this.modalCancelar.idReserva;
+    if (!id) return;
+
+    this.cerrarModalCancelar();
+
+    this.reservasService.cancelarReserva(id).subscribe({
+      next: () &#x3D;&gt; {
+        this.mostrarPopup(&#x27;Turno Cancelado&#x27;, &#x60;La reserva #${id} fue cancelada exitosamente.&#x60;, &#x27;exito&#x27;);
+        this.cargarDatos();
+      },
+      error: (err) &#x3D;&gt; {
+        const msg &#x3D; err.error?.message || &#x27;Error al cancelar la reserva.&#x27;;
+        this.mostrarPopup(&#x27;Error al Cancelar&#x27;, msg, &#x27;error&#x27;);
+      }
+    });
+  }
+
+  mostrarPopup(titulo: string, mensaje: string, tipo: &#x27;exito&#x27; | &#x27;error&#x27; &#x3D; &#x27;exito&#x27;): void {
+    this.popupNotificacion &#x3D; {
+      visible: true,
+      tipo,
+      titulo,
+      mensaje
+    };
+  }
+
+  cerrarNotificacion(): void {
+    this.popupNotificacion.visible &#x3D; false;
+  }
+}</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+    .panel-container { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+    .card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .data-table th, .data-table td { border-bottom: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
+    .btn-primary { background: #0284c7; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-primary:hover { background: #0369a1; }
+    .btn-cancel { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-cancel:hover { background: #dc2626; }
+    .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge.activo { background: #e0f2fe; color: #0369a1; }
+    .badge.atendido { background: #dcfce7; color: #15803d; }
+    .badge.ausente { background: #fef3c7; color: #b45309; }
+    .badge.cancelado { background: #fee2e2; color: #b91c1c; }
+    .muted { color: #64748b; font-style: italic; }
+
+    /* Modales Emergentes */
+    .modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center;
+      align-items: center; z-index: 1000;
+    }
+    .modal-box {
+      background: white; padding: 1.5rem 2rem; border-radius: 8px; width: 90%;
+      max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: fadeIn 0.15s ease-out;
+    }
+    .modal-box h4 { margin-top: 0; margin-bottom: 0.5rem; color: #0f172a; }
+    .modal-highlight { font-size: 1.1rem; color: #0284c7; margin: 0.5rem 0; }
+    .modal-subtext { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
+    .btn-secondary { background: #e2e8f0; color: #334155; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-danger { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    .btn-danger:hover { background: #dc2626; }
+    .modal-box.exito h4 { color: #15803d; }
+    .modal-box.error h4 { color: #b91c1c; }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="panel-container">  <h2>Panel de Administración de la Clínica</h2>  <!-- Gestión de Aranceles Médicos -->  <section class="card">    <h3>Aranceles de Consultas Médicas</h3>    <table class="data-table">      <thead>        <tr>          <th>Médico</th>          <th>Matrícula</th>          <th>Arancel Actual</th>          <th>Nuevo Arancel</th>          <th>Acción</th>        </tr>      </thead>      <tbody>        <tr *ngFor="let m of medicos">          <td>Dr. {{ m.usuario.nombres }} {{ m.usuario.apellidos }}</td>          <td>{{ m.matricula }}</td>          <td>$ {{ m.valor_consulta }}</td>          <td>            <input              type="number"              [(ngModel)]="nuevosValores[m.id]"              placeholder="Monto"              min="1"              style="width: 110px; padding: 0.35rem; border: 1px solid #ccc; border-radius: 4px;"            />          </td>          <td>            <button class="btn-primary" (click)="abrirModalActualizarArancel(m)">              Actualizar            </button>          </td>        </tr>      </tbody>    </table>  </section>  <!-- Tabla Global de Reservas -->  <section class="card">    <h3>Todas las Reservas de la Clínica</h3>    <table *ngIf="reservas.length > 0; else sinReservas" class="data-table">      <thead>        <tr>          <th>ID</th>          <th>Fecha y Hora</th>          <th>Paciente</th>          <th>Médico</th>          <th>Arancel Congelado</th>          <th>Estado</th>          <th>Acción</th>        </tr>      </thead>      <tbody>        <tr *ngFor="let r of reservas">          <td>#{{ r.id }}</td>          <td>{{ r.fecha_hora | date:\'dd/MM/yyyy HH:mm\' }} hs</td>          <td>{{ r.paciente?.nombres }} {{ r.paciente?.apellidos }} (DNI: {{ r.paciente?.documento }})</td>          <td>Dr. {{ r.medico?.usuario?.nombres }} {{ r.medico?.usuario?.apellidos }}</td>          <td>$ {{ r.valor_consulta }}</td>          <td><span class="badge" [ngClass]="r.estado.toLowerCase()">{{ r.estado }}</span></td>          <td>            <button              *ngIf="r.estado === estadoReserva.ACTIVO"              class="btn-cancel"              (click)="abrirModalCancelar(r.id)">              Cancelar Turno            </button>          </td>        </tr>      </tbody>    </table>    <ng-template #sinReservas>      <p class="muted">No hay reservas registradas en el sistema.</p>    </ng-template>  </section>  <!-- Modal de Confirmación para Actualizar Arancel -->  <div class="modal-backdrop" *ngIf="modalArancel.visible">    <div class="modal-box">      <h4>Confirmar Nuevo Arancel</h4>      <p>        ¿Confirma actualizar el valor de consulta para el        <b>Dr. {{ modalArancel.medico?.usuario?.nombres }} {{ modalArancel.medico?.usuario?.apellidos }}</b>?      </p>      <p class="modal-highlight">        Nuevo monto: <b>$ {{ modalArancel.monto }}</b>      </p>      <p class="modal-subtext">        Nota: Las reservas ya emitidas conservarán inalterado su valor original por política de congelamiento.      </p>      <div class="modal-actions">        <button class="btn-secondary" (click)="cerrarModalArancel()">Volver</button>        <button class="btn-primary" (click)="confirmarActualizarArancel()">Confirmar Cambio</button>      </div>    </div>  </div>  <!-- Modal de Confirmación para Cancelar Turno -->  <div class="modal-backdrop" *ngIf="modalCancelar.visible">    <div class="modal-box">      <h4>Confirmar Cancelación de Turno</h4>      <p>¿Está seguro de que desea cancelar el turno <b>#{{ modalCancelar.idReserva }}</b>?</p>      <p class="modal-subtext">        Como Administrador, la cancelación está permitida hasta el momento exacto en que inicia la consulta.      </p>      <div class="modal-actions">        <button class="btn-secondary" (click)="cerrarModalCancelar()">Volver</button>        <button class="btn-danger" (click)="confirmarCancelacion()">Confirmar Cancelación</button>      </div>    </div>  </div>  <!-- Modal de Notificación (Éxito / Error) -->  <div class="modal-backdrop" *ngIf="popupNotificacion.visible">    <div class="modal-box" [ngClass]="popupNotificacion.tipo">      <h4>{{ popupNotificacion.titulo }}</h4>      <p>{{ popupNotificacion.mensaje }}</p>      <div class="modal-actions">        <button class="btn-primary" (click)="cerrarNotificacion()">Aceptar</button>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'Login', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PanelAdminComponent', 'selector': 'app-panel-admin'},{'name': 'PanelMedicoComponent', 'selector': 'app-panel-medico'},{'name': 'PanelPacienteComponent', 'selector': 'app-panel-paciente'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PanelAdminComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PanelAdminComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
