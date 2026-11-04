@@ -1,0 +1,14 @@
+# Ignorar dependencias en cualquier subdirectorio
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Ignorar archivos locales y logs
+**/.env
+**/.env.*
+!**/.env.example
+**/*.log
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
